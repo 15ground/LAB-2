@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAB 3</title>
+    <script src="xuatmang.js"></script>
+    <script src="songuyento.js"></script>
+    <script src="fibo.js"></script>
+    <script src="daonguocchuoi.js"></script>
+    <script src="checkchuoi.js"></script>
+    <script src="checkmang.js"></script>
+    <script src="util.js"></script>
+    <style>
+        .box {
+            border: 1px solid bisque;
+            background-color: white;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p class="debai">
+            Bài 1: Thao tác mảng với HTML DOM
+        </p>
+        <label for="chuoiThaoTac">Nhập một mảng bất kì: </label>
+        <input type="text" id="chuoiThaoTac">
+        <p id="ketQua2"></p>
+        <p id="ketQua3"></p>
+        <p id="ketQua4"></p>
+        <p id="ketQua5"></p>
+        <p id="ketQua6"></p>
+        <p id="ketQua7"></p>
+        <p id="ketQua8"></p>
+        <button onclick="xuatMang()">Xuất kết quả</button>
+    </div>
+    <div class="box">
+        <p class="debai">
+            Bài 2: Xuất ra danh sách số Fibonaci
+        </p>
+        <label for="soLuongSoFiBo">Nhập số lượng số Fibonaci muốn xuất ra:</label>
+        <input type="number" id="soLuongSoFiBo">
+        <button onclick="xuatFiBo()">Xuất kết quả</button>
+        <p id="ketQua1"></p>
+    </div>
+    <div class="box">
+        <p class="debai">
+            Bài 3: Xuất ra danh sách số nguyên tố
+        </p>
+        <!-- input -->
+        <label for="soLuongSo">Nhập số lượng số nguyên tố muốn xuất ra:</label>
+        <input type="number" id="soLuongSo">
+        <!-- button -->
+        <button onclick="xuatSoNguyenTo()">Xuất kết quả</button>
+        <p id="ketQua"></p>
+    </div>
+    <div class="box">
+        <p class="debai">
+            Bài 4: Đảo ngược một chuỗi
+        </p>
+        <label for="chuoi">Nhập một chuỗi bất kì: </label>
+        <input type="text" id="chuoi">
+        <button onclick="chuoiNguoc()">Xuất kết quả</button>
+        <p id="ketQua9"></p>
+    </div>
+    <div class="box">
+        <p class="debai">
+            Bài 5: Thêm và kiểm tra phần tử trong chuỗi
+        </p>
+        <label for="chuoiS1">Nhập chuỗi s1:</label>
+        <input type="text" id="chuoiS1">
+        <br>
+        <label for="chuoiS2">Nhập chuỗi s2:</label>
+        <input type="text" id="chuoiS2">
+        <br>
+        <p id="ketQua10"></p>
+        <p id="ketQua11"></p>
+        <button onclick="kiemTraChuoi()">Xuất kết quả</button>
+    </div>
+    <div class="box">
+        <p class="debai">
+            Bài 6: Kiểm tra phần tử tồn tại trong mảng
+        </p>
+        <label for="checkChuoiS1">Nhập một mảng bất kì: </label>
+        <input type="text" id="checkChuoiS1">
+        <br>
+        <label for="checkChuoiS2">Nhập một mảng bất kì: </label>
+        <input type="text" id="checkChuoiS2">
+        <p id="ketQua12"></p>
+        <button onclick="checkMang()">Kiểm tra</button>
+    </div>
+    <script>
+        function xuatMang() {
+            var nodeMang = document.getElementById("chuoiThaoTac");
+            var n = nodeMang.value;
+            var s1 = n.split(" ");
+            var dsPtu = xuatPtu(s1);
+            var nodeKetQua = document.getElementById("ketQua2");
+            nodeKetQua.innerHTML = "Phần tử của màng là:  " + chuyenChuoi(dsPtu);
+            var dsNguoc = daoNguoc(s1);
+            var nodeKetQua = document.getElementById("ketQua3");
+            nodeKetQua.innerHTML = "Mảng đảo ngược là:  " + chuyenChuoi(dsNguoc);
+            var tongMang = tongPtu(s1);
+            var nodeketQua = document.getElementById("ketQua4");
+            nodeketQua.innerHTML = "Tổng mảng =  " + tongMang;
+            var tbcMang = tbc(s1);
+            var nodeketQua = document.getElementById("ketQua5");
+            nodeketQua.innerHTML = "Trung bình cộng của các phần tử =  " + tbcMang;
+            var max = timMax(s1);
+            nodeKetQua = document.getElementById("ketQua6");
+            nodeKetQua.innerHTML = "Max =  " + max;
+            var min = timMin(s1);
+            nodeKetQua = document.getElementById("ketQua7");
+            nodeKetQua.innerHTML = "Min =  " + min;
+            var soThuHai = soLonThuHai(s1);
+            nodeKetQua = document.getElementById("ketQua8");
+            nodeKetQua.innerHTML = "Số lớn thứ hai trong mảng là:  " + soThuHai;
+        }
+        function xuatSoNguyenTo() {
+            // B1: Truy cập node input
+            var nodeSoLuong = document.getElementById("soLuongSo");
+            var n = nodeSoLuong.value;
+            // B2: Gọi hàm trong file songuyento.js
+            var dsSoNguyenTo = xuatSNT(n);
+            // B3: Truy cập vào node ketQua để xuất danh số nguyên tố
+            var nodeKetQua = document.getElementById("ketQua");
+            nodeKetQua.innerHTML = "Danh sách các số nguyên tố là: " + chuyenChuoi(dsSoNguyenTo);
+        }
+        function xuatFiBo() {
+            var nodeFiBo = document.getElementById("soLuongSoFiBo");
+            var n = nodeFiBo.value;
+            var dsFiBo = xuatSoFiBo(n);
+            var nodeKetQua = document.getElementById("ketQua1");
+            nodeKetQua.innerHTML = "Danh sách các số Fibonaci: " + chuyenChuoi(dsFiBo);
+        }
+        function chuoiNguoc() {
+            var nodeChuoi = document.getElementById("chuoi");
+            var n = nodeChuoi.value;
+            var dsChuoi = daoNguocChuoi(n);
+            var nodeKetQua = document.getElementById("ketQua9");
+            nodeKetQua.innerHTML = "Chuỗi sau khi đảo ngược là: " + dsChuoi;
+        }
+        function kiemTraChuoi() {
+            var nodeChuoiS1 = document.getElementById("chuoiS1");
+            var n = nodeChuoiS1.value;
+            var dsChuoiS1 = xuatChuoi(n);
+            var nodeKetQua = document.getElementById("ketQua10");
+            nodeKetQua.innerHTML = "Chuỗi s1 sau khi thêm kí tự là: " + dsChuoiS1;
+            var nodeChuoiCuaS1 = document.getElementById("chuoiS1");
+            var b = nodeChuoiCuaS1.value;
+            var nodeChuoiS2 = document.getElementById("chuoiS2");
+            var m = nodeChuoiS2.value;
+            var dsChuoiS2 = checkChuoi(b, m);
+            var nodeKetQua = document.getElementById("ketQua11");
+            nodeKetQua.innerHTML = "Số lượng s2 có trong s1 là: " + dsChuoiS2;
+        }
+        function checkMang() {
+            var nodeMangS1 = document.getElementById("checkChuoiS1");
+            var n = nodeMangS1.value;
+            var s1 = n.split(" ");
+            var nodeMangS2 = document.getElementById("checkChuoiS2");
+            var m = nodeMangS2.value;
+            var s2 = m.split(" ");
+            var checkPtuMang = kiemTraMang(s1, s2);
+            var nodeKetQua = document.getElementById("ketQua12");
+            nodeKetQua.innerHTML = "Kiểm tra s2 trong s1: " + checkPtuMang;
+        }
+    </script>
+</body>
+
+</html>
